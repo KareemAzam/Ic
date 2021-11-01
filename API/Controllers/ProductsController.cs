@@ -20,13 +20,6 @@ namespace API.Controllers
             _repo = repo;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
-        {
-            var products = await _repo.GetProductsAsync();
-            return Ok(products);
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
@@ -37,6 +30,13 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductBrands()
         {
             return Ok(await _repo.GetProductBrandsAsync());
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Product>>> GetProducts()
+        {
+            var products = await _repo.GetProductsAsync();
+            return Ok(products);
         }
 
         [HttpGet("types")]
