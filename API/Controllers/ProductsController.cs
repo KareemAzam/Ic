@@ -20,7 +20,6 @@ namespace API.Controllers
             _repo = repo;
         }
 
-        // GET: api/<Products>
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
@@ -28,29 +27,22 @@ namespace API.Controllers
             return Ok(products);
         }
 
-        // GET api/<Products>/5
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             return await _repo.GetProductByIdAsync(id);
         }
 
-        // POST api/<Products>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductBrands()
         {
+            return Ok(await _repo.GetProductBrandsAsync());
         }
 
-        // PUT api/<Products>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-        }
-
-        // DELETE api/<Products>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(await _repo.GetProductTypesAsync());
         }
     }
 }
