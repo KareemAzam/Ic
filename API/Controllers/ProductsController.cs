@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
-using Infrastructure.Data;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,18 +12,19 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly Db _db;
+        private readonly IProductRepository _repo;
 
-        public ProductsController(Db db)
+
+        public ProductsController(IProductRepository repo)
         {
-            _db = db;
+            _repo = repo;
         }
 
         // GET: api/<Products>
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var products = await _db.Products.ToListAsync();
+            var products = await _repo.GetProductsAsync();
             return Ok(products);
         }
 
@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _db.Products.FindAsync(id);
+            return await _repo.GetProductByIdAsync(id);
         }
 
         // POST api/<Products>
