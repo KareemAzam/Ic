@@ -2,10 +2,11 @@
 
 namespace Core.Specifications
 {
-    public class ProductsAndTypesAndBrandsSpecification : BaseSpecification<Product>
+    public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
     {
-        public ProductsAndTypesAndBrandsSpecification(ProductSpecParams productParams)
+        public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
             : base(x =>
+                (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
                 (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
                 (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
             )
@@ -30,7 +31,7 @@ namespace Core.Specifications
                 }
         }
 
-        public ProductsAndTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
+        public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
         {
             AddInclude(x => x.ProductBrand);
             AddInclude(x => x.ProductType);
