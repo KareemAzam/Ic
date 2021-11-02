@@ -34,6 +34,8 @@ namespace API
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
