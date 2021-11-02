@@ -11,9 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepository<ProductBrand> _productBrandsRepo;
