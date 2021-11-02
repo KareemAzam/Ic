@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,23 +25,27 @@ namespace API.Controllers
             _productTypesRepo = productTypesRepo;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
+        {
+            var spec = new ProductsAndTypesAndBrandsSpecification();
+            //var products = await _productsRepo.ListAllAsync();
+            var products = await _productsRepo.ListAsync(spec);
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _productsRepo.GetByIdAsync(id);
+            var spec = new ProductsAndTypesAndBrandsSpecification(id);
+
+            return await _productsRepo.GetEntityWithSpec(spec);
         }
 
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
             return Ok(await _productBrandsRepo.ListAllAsync());
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
-        {
-            var products = await _productsRepo.ListAllAsync();
-            return Ok(products);
         }
 
         [HttpGet("types")]
