@@ -8,6 +8,7 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  selected = 'Alphabetical';
   products: IProduct[] = [];
   constructor(private shopeService: ShopService) {}
 
