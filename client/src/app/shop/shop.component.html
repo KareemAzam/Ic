@@ -40,15 +40,9 @@
       <mat-divider></mat-divider>
     </mat-action-list>
   </section>
+
   <section>
-    <div
-      style="
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      "
-    >
+    <div class="card-header">
       <header>
         <span>Showing <strong>10</strong> of <strong>16</strong> result</span>
       </header>
@@ -68,7 +62,7 @@
 
     <div class="card-container">
       <div *ngFor="let item of products">
-        <app-product-item></app-product-item>
+        <app-product-item [product]="item"></app-product-item>
       </div>
     </div>
   </section>

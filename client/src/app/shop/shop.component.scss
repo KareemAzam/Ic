@@ -4,13 +4,16 @@
   grid-template-rows: auto;
   gap: 10px 20px;
   margin: 1rem;
-  //   justify-items: center;
-  //   align-content: center;
-  //   align-items: center;
 }
 
 .filter {
   text-align: center;
+}
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .card-container {
   display: grid;
