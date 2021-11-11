@@ -18,26 +18,18 @@
 
     <mat-action-list>
       <h2>Brands</h2>
-      <button mat-list-item>Save</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Undo</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Save</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Undo</button>
-      <mat-divider></mat-divider>
+      <button mat-list-item *ngFor="let brand of brands">
+        {{ brand.name }}
+        <mat-divider></mat-divider>
+      </button>
     </mat-action-list>
 
     <mat-action-list>
       <h2>Types</h2>
-      <button mat-list-item>Save Save</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Undo</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Save</button>
-      <mat-divider></mat-divider>
-      <button mat-list-item>Undo</button>
-      <mat-divider></mat-divider>
+      <button mat-list-item *ngFor="let type of types">
+        {{ type.name }}
+        <mat-divider></mat-divider>
+      </button>
     </mat-action-list>
   </section>
 
