@@ -1,13 +1,13 @@
 .grid-container {
   display: grid;
-  grid-template-columns: 20fr 70fr;
+  grid-template-columns: 10fr 80fr;
   grid-template-rows: auto;
   gap: 10px 20px;
   margin: 1rem;
 }
 
 .filter {
-  text-align: center;
+  // text-align: center;
 }
 .card-header {
   display: flex;

@@ -1,7 +1,8 @@
 <div class="grid-container">
   <section class="filter">
     <mat-action-list>
-      <h4>Sort</h4>
+      <h3 matSubheader>Sort</h3>
+
       <mat-form-field appearance="fill">
         <mat-label>Sort</mat-label>
         <mat-select [(ngModel)]="selected">
@@ -16,21 +17,32 @@
       </mat-form-field>
     </mat-action-list>
 
-    <mat-action-list>
-      <h2>Brands</h2>
-      <button mat-list-item *ngFor="let brand of brands">
+    <mat-selection-list dense dense [multiple]="false">
+      <h3 matSubheader>Brands</h3>
+      <mat-list-option
+        *ngFor="let brand of brands"
+        [value]="brand.id"
+        [selected]="brand.id == this.brandIdSelected"
+        (click)="onBrandSelected(brand.id)"
+      >
         {{ brand.name }}
         <mat-divider></mat-divider>
-      </button>
-    </mat-action-list>
+      </mat-list-option>
+    </mat-selection-list>
 
-    <mat-action-list>
-      <h2>Types</h2>
-      <button mat-list-item *ngFor="let type of types">
+    <mat-selection-list dense [multiple]="false">
+      <h3 matSubheader>Types</h3>
+      <mat-list-option
+        mat-list-item
+        *ngFor="let type of types"
+        [value]="type.id"
+        [selected]="type.id == this.typeIdSelected"
+        (click)="onTypeSelected(type.id)"
+      >
         {{ type.name }}
         <mat-divider></mat-divider>
-      </button>
-    </mat-action-list>
+      </mat-list-option>
+    </mat-selection-list>
   </section>
 
   <section>

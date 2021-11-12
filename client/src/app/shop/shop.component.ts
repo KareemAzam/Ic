@@ -14,8 +14,8 @@ export class ShopComponent implements OnInit {
   products?: IProduct[];
   brands?: IBrand[];
   types?: IType[];
-  brandIdSelected?: number;
-  typeIdSelected?: number;
+  brandIdSelected = 0;
+  typeIdSelected = 0;
   constructor(private shopeService: ShopService) {}
 
   ngOnInit(): void {
@@ -66,5 +66,9 @@ export class ShopComponent implements OnInit {
   onTypeSelected(typeId: number) {
     this.typeIdSelected = typeId;
     this.getProducts();
+  }
+
+  m(d: any) {
+    console.log('asd');
   }
 }

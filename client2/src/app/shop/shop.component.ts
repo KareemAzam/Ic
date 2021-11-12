@@ -13,8 +13,8 @@ export class ShopComponent implements OnInit {
   products: IProduct[] | undefined;
   brands: IBrand[] | undefined;
   types: IType[] | undefined;
-  brandIdSelected: number | undefined;
-  typeIdSelected: number | undefined;
+  brandIdSelected = 0;
+  typeIdSelected = 0;
   constructor(private shopeService: ShopService) {}
 
   ngOnInit(): void {
