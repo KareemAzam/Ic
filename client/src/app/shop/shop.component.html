@@ -1,43 +1,43 @@
 <div class="grid-container">
   <section class="filter">
-    <mat-action-list>
-      <h3 matSubheader>Sort</h3>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Sort</mat-label>
-        <mat-select [(ngModel)]="selected">
-          <mat-option value="Alphabetical"> Alphabetical </mat-option>
-          <mat-option value="Price: Low to High">
-            Price: Low to High
-          </mat-option>
-          <mat-option value="Price: High to Low">
-            Price: High to Low
+
+    <mat-action-list>
+      <h3 matSubheader>sort</h3>
+      <mat-form-field appearance="legacy">
+        <mat-select (selectionChange)="onSortSelected(sortSelected)" [(ngModel)]="sortSelected"
+        >
+          <mat-option *ngFor="let sort of sortOption" [value]="sort.value">
+            {{ sort.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-action-list>
 
-    <mat-selection-list dense dense [multiple]="false">
+    <mat-selection-list (selectionChange)="onBrandSelected(brandIdSelected)"
+                        [(ngModel)]="brandIdSelected"
+                        [multiple]="false"
+                        dense>
       <h3 matSubheader>Brands</h3>
       <mat-list-option
         *ngFor="let brand of brands"
-        [value]="brand.id"
         [selected]="brand.id == this.brandIdSelected"
-        (click)="onBrandSelected(brand.id)"
+        [value]="brand.id"
       >
         {{ brand.name }}
         <mat-divider></mat-divider>
       </mat-list-option>
     </mat-selection-list>
 
-    <mat-selection-list dense [multiple]="false">
+    <mat-selection-list (selectionChange)="onTypeSelected($event.source.selectedOptions.selected[0].value)"
+
+                        [multiple]="false"
+                        dense>
       <h3 matSubheader>Types</h3>
       <mat-list-option
-        mat-list-item
         *ngFor="let type of types"
-        [value]="type.id"
         [selected]="type.id == this.typeIdSelected"
-        (click)="onTypeSelected(type.id)"
+        [value]="type.id"
       >
         {{ type.name }}
         <mat-divider></mat-divider>
@@ -52,13 +52,13 @@
       </header>
 
       <div>
-        <mat-form-field style="margin: 0px 0.5rem" appearance="standard">
-          <input matInput placeholder="search" />
+        <mat-form-field appearance="standard" style="margin: 0px 0.5rem">
+          <input matInput placeholder="search"/>
         </mat-form-field>
-        <button style="margin: 0px 0.5rem" mat-flat-button color="primary">
+        <button color="primary" mat-flat-button style="margin: 0px 0.5rem">
           Search
         </button>
-        <button style="margin: 0px 0.5rem" mat-flat-button color="accent">
+        <button color="accent" mat-flat-button style="margin: 0px 0.5rem">
           Reset
         </button>
       </div>

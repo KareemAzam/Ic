@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { IBrand } from '../shared/Models/brand';
-import { IProduct } from '../shared/Models/product';
-import { IType } from '../shared/Models/type';
-import { ShopService } from './shop.service';
+import {Component, OnInit} from '@angular/core';
+import {IBrand} from '../shared/Models/brand';
+import {IProduct} from '../shared/Models/product';
+import {IType} from '../shared/Models/type';
+import {ShopService} from './shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -10,13 +10,21 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  selected = 'Alphabetical';
   products?: IProduct[];
   brands?: IBrand[];
   types?: IType[];
   brandIdSelected = 0;
   typeIdSelected = 0;
-  constructor(private shopeService: ShopService) {}
+  sortSelected = 'name';
+  sortOption = [
+    {name: 'Alphabetical', value: 'name'},
+    {name: 'Price: Low to High', value: 'priceAsc'},
+    {name: 'Price: High to Low', value: 'priceDesc'},
+  ];
+  selected = 'option2';
+
+  constructor(private shopService: ShopService) {
+  }
 
   ngOnInit(): void {
     this.getProducts();
@@ -25,8 +33,8 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopeService
-      .getProduct(this.brandIdSelected, this.typeIdSelected)
+    this.shopService
+      .getProduct(this.brandIdSelected, this.typeIdSelected, this.sortSelected)
       .subscribe(
         (response) => {
           this.products = response?.data;
@@ -36,10 +44,11 @@ export class ShopComponent implements OnInit {
         }
       );
   }
+
   getBrands() {
-    this.shopeService.getBrand().subscribe(
+    this.shopService.getBrand().subscribe(
       (response) => {
-        this.brands = [{ id: 0, name: 'All' }, ...response];
+        this.brands = [{id: 0, name: 'All'}, ...response];
       },
       (error) => {
         console.log(error);
@@ -48,9 +57,9 @@ export class ShopComponent implements OnInit {
   }
 
   getTypes() {
-    this.shopeService.getType().subscribe(
+    this.shopService.getType().subscribe(
       (response) => {
-        this.types = [{ id: 0, name: 'All' }, ...response];
+        this.types = [{id: 0, name: 'All'}, ...response];
       },
       (error) => {
         console.log(error);
@@ -68,7 +77,12 @@ export class ShopComponent implements OnInit {
     this.getProducts();
   }
 
-  m(d: any) {
-    console.log('asd');
+  onSortSelected(sort: string) {
+    this.sortSelected = sort;
+    this.getProducts();
+  }
+
+  onTest($event: any) {
+    console.log($event)
   }
 }
