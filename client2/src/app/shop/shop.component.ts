@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IBrand } from '../shared/Models/brand';
 import { IProduct } from '../shared/Models/product';
 import { IType } from '../shared/Models/productType';
+import { ShopParams } from '../shared/Models/shopParams';
 import { ShopService } from './shop.service';
 
 @Component({
@@ -10,12 +11,11 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  products?: IProduct[];
-  brands?: IBrand[];
-  types?: IType[];
-  brandIdSelected = 0;
-  typeIdSelected = 0;
-  sortSelected = 'name';
+  products!: IProduct[];
+  brands!: IBrand[];
+  types!: IType[];
+  shopParams = new ShopParams();
+  totalCount = 0;
   sortOption = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
@@ -31,16 +31,17 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopeService
-      .getProduct(this.brandIdSelected, this.typeIdSelected, this.sortSelected)
-      .subscribe(
-        (response) => {
-          this.products = response?.data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.shopeService.getProduct(this.shopParams).subscribe(
+      (response) => {
+        this.products = response!.data;
+        this.shopParams.pageNumber = response!.pageIndex;
+        this.shopParams.pageSize = response!.pageSize;
+        this.totalCount = response!.count;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getBrands() {
@@ -66,17 +67,22 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    this.brandIdSelected = brandId;
+    this.shopParams.brandId = brandId;
     this.getProducts();
   }
 
   onTypeSelected(typeId: number) {
-    this.typeIdSelected = typeId;
+    this.shopParams.typeId = typeId;
     this.getProducts();
   }
 
   onSortSelected(sort: string) {
-    this.sortSelected = sort;
+    this.shopParams.sort = sort;
+    this.getProducts();
+  }
+
+  onPageChange($event: any) {
+    this.shopParams.pageNumber = $event.page;
     this.getProducts();
   }
 

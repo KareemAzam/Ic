@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const MaterialComponents = [
   MatButtonModule,
   MatIconModule,
@@ -20,6 +22,7 @@ const MaterialComponents = [
   FormsModule,
   MatSelectModule,
   MatInputModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

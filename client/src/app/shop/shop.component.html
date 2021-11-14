@@ -1,11 +1,11 @@
 <div class="grid-container">
   <section class="filter">
-
-
     <mat-action-list>
       <h3 matSubheader>sort</h3>
       <mat-form-field appearance="legacy">
-        <mat-select (selectionChange)="onSortSelected(sortSelected)" [(ngModel)]="sortSelected"
+        <mat-select
+          (selectionChange)="onSortSelected(shopParams.sort)"
+          [(ngModel)]="shopParams.sort"
         >
           <mat-option *ngFor="let sort of sortOption" [value]="sort.value">
             {{ sort.name }}
@@ -14,14 +14,17 @@
       </mat-form-field>
     </mat-action-list>
 
-    <mat-selection-list (selectionChange)="onBrandSelected(brandIdSelected)"
-                        [(ngModel)]="brandIdSelected"
-                        [multiple]="false"
-                        dense>
+    <mat-selection-list
+      (selectionChange)="
+        onBrandSelected($event.source.selectedOptions.selected[0].value)
+      "
+      [multiple]="false"
+      dense
+    >
       <h3 matSubheader>Brands</h3>
       <mat-list-option
         *ngFor="let brand of brands"
-        [selected]="brand.id == this.brandIdSelected"
+        [selected]="brand.id == shopParams.brandId"
         [value]="brand.id"
       >
         {{ brand.name }}
@@ -29,14 +32,17 @@
       </mat-list-option>
     </mat-selection-list>
 
-    <mat-selection-list (selectionChange)="onTypeSelected($event.source.selectedOptions.selected[0].value)"
-
-                        [multiple]="false"
-                        dense>
+    <mat-selection-list
+      (selectionChange)="
+        onTypeSelected($event.source.selectedOptions.selected[0].value)
+      "
+      [multiple]="false"
+      dense
+    >
       <h3 matSubheader>Types</h3>
       <mat-list-option
         *ngFor="let type of types"
-        [selected]="type.id == this.typeIdSelected"
+        [selected]="type.id == shopParams.typeId"
         [value]="type.id"
       >
         {{ type.name }}
@@ -53,7 +59,7 @@
 
       <div>
         <mat-form-field appearance="standard" style="margin: 0px 0.5rem">
-          <input matInput placeholder="search"/>
+          <input matInput placeholder="search" />
         </mat-form-field>
         <button color="primary" mat-flat-button style="margin: 0px 0.5rem">
           Search
@@ -69,5 +75,14 @@
         <app-product-item [product]="item"></app-product-item>
       </div>
     </div>
+    <mat-paginator
+      [length]="totalCount"
+      [pageSize]="shopParams.pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event.pageIndex, $event.pageSize)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
   </section>
 </div>

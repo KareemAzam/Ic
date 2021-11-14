@@ -1,54 +1,56 @@
-import {Component, OnInit} from '@angular/core';
-import {IBrand} from '../shared/Models/brand';
-import {IProduct} from '../shared/Models/product';
-import {IType} from '../shared/Models/type';
-import {ShopService} from './shop.service';
-
+import { Component, OnInit } from '@angular/core';
+import { IBrand } from '../shared/Models/brand';
+import { IProduct } from '../shared/Models/product';
+import { ShopParams } from '../shared/Models/shopParams';
+import { IType } from '../shared/Models/type';
+import { ShopService } from './shop.service';
+import { MatPaginatorDefaultOptions } from '@angular/material/paginator';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  products?: IProduct[];
-  brands?: IBrand[];
-  types?: IType[];
-  brandIdSelected = 0;
-  typeIdSelected = 0;
-  sortSelected = 'name';
+  products!: IProduct[];
+  brands!: IBrand[];
+  types!: IType[];
+  shopParams: ShopParams;
+  totalCount = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   sortOption = [
-    {name: 'Alphabetical', value: 'name'},
-    {name: 'Price: Low to High', value: 'priceAsc'},
-    {name: 'Price: High to Low', value: 'priceDesc'},
+    { name: 'Alphabetical', value: 'name' },
+    { name: 'Price: Low to High', value: 'priceAsc' },
+    { name: 'Price: High to Low', value: 'priceDesc' },
   ];
   selected = 'option2';
 
-  constructor(private shopService: ShopService) {
-  }
+  constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
+    this.shopParams = new ShopParams();
     this.getProducts();
     this.getBrands();
     this.getTypes();
   }
 
   getProducts() {
-    this.shopService
-      .getProduct(this.brandIdSelected, this.typeIdSelected, this.sortSelected)
-      .subscribe(
-        (response) => {
-          this.products = response?.data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.shopService.getProduct(this.shopParams).subscribe(
+      (response) => {
+        this.products = response!.data;
+        this.shopParams.pageIndex = response!.pageIndex;
+        this.shopParams.pageSize = response!.pageSize;
+        this.totalCount = response!.count;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getBrands() {
     this.shopService.getBrand().subscribe(
       (response) => {
-        this.brands = [{id: 0, name: 'All'}, ...response];
+        this.brands = [{ id: 0, name: 'All' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -59,7 +61,7 @@ export class ShopComponent implements OnInit {
   getTypes() {
     this.shopService.getType().subscribe(
       (response) => {
-        this.types = [{id: 0, name: 'All'}, ...response];
+        this.types = [{ id: 0, name: 'All' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -68,21 +70,33 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brandId: number) {
-    this.brandIdSelected = brandId;
+    this.shopParams.brandId = brandId;
     this.getProducts();
   }
 
   onTypeSelected(typeId: number) {
-    this.typeIdSelected = typeId;
+    this.shopParams.typeId = typeId;
     this.getProducts();
   }
 
   onSortSelected(sort: string) {
-    this.sortSelected = sort;
+    this.shopParams.sort = sort;
     this.getProducts();
   }
 
+  onPageChange(pageIndex: number, pageSize: number) {
+    this.shopParams.pageIndex = pageIndex + 1;
+    this.shopParams.pageSize = pageSize;
+    this.getProducts();
+  }
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map((str) => +str);
+    }
+  }
   onTest($event: any) {
-    console.log($event)
+    console.log($event);
   }
 }
