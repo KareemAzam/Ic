@@ -54,7 +54,15 @@
   <section>
     <div class="card-header">
       <header>
-        <span>Showing <strong>10</strong> of <strong>16</strong> result</span>
+        <mat-paginator
+          [length]="totalCount"
+          [pageSize]="shopParams.pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true"
+          (page)="onPageChange($event.pageIndex, $event.pageSize)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
       </header>
 
       <div>
@@ -75,14 +83,5 @@
         <app-product-item [product]="item"></app-product-item>
       </div>
     </div>
-    <mat-paginator
-      [length]="totalCount"
-      [pageSize]="shopParams.pageSize"
-      [pageSizeOptions]="pageSizeOptions"
-      [showFirstLastButtons]="true"
-      (page)="onPageChange($event.pageIndex, $event.pageSize)"
-      aria-label="Select page"
-    >
-    </mat-paginator>
   </section>
 </div>
