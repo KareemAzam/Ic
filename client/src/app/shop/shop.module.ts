@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
 import { MaterialModule } from '../material.module';
 import { ProductItemComponent } from './product-item/product-item.component';
-import { ProdutDetailsComponent } from './produt-details/produt-details.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
-  declarations: [ShopComponent, ProductItemComponent, ProdutDetailsComponent],
+  declarations: [ShopComponent, ProductItemComponent, ProductDetailsComponent],
   imports: [CommonModule, MaterialModule],
   exports: [ShopComponent],
 })
