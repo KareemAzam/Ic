@@ -5,13 +5,17 @@
     alt="{{ product?.name }}"
   />
   <mat-card-content>
-    <a mat-button color="primary" href="#">{{ product?.name }}</a>
+    <a mat-button color="primary" routerLink="/shop/{{ product?.id }}">{{
+      product?.name
+    }}</a>
     <span>{{ product?.price | currency }}</span>
   </mat-card-content>
   <mat-card-actions class="mat-card-actions">
     <button mat-stroked-button>
       <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button mat-stroked-button>View</button>
+    <button mat-stroked-button routerLink="/shop/{{ product?.id }}">
+      View
+    </button>
   </mat-card-actions>
 </mat-card>

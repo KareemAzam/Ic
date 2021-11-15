@@ -13,10 +13,15 @@
     fixed-top
   "
 >
-  <img src="../../assets/images/logo.png" alt="logo" style="max-width: 70px" />
+  <img
+    src="../../assets/images/logo.png"
+    alt="logo"
+    style="max-width: 70px"
+    routerLink="/"
+  />
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
-    <a class="p-2 text-dark" href="#">Home</a>
-    <a class="p-2 text-dark" href="#">Shop</a>
+    <a class="p-2 text-dark" [routerLink]="['/']">Home</a>
+    <a class="p-2 text-dark" routerLink="/shop">Shop</a>
     <a class="p-2 text-dark" href="#">Contact</a>
   </nav>
 
