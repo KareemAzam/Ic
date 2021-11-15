@@ -67,12 +67,22 @@
 
       <div>
         <mat-form-field appearance="standard" style="margin: 0px 0.5rem">
-          <input matInput placeholder="search" />
+          <input #search matInput placeholder="search" />
         </mat-form-field>
-        <button color="primary" mat-flat-button style="margin: 0px 0.5rem">
+        <button
+          color="primary"
+          (click)="onSearch()"
+          mat-flat-button
+          style="margin: 0px 0.5rem"
+        >
           Search
         </button>
-        <button color="accent" mat-flat-button style="margin: 0px 0.5rem">
+        <button
+          color="accent"
+          (click)="onReset()"
+          mat-flat-button
+          style="margin: 0px 0.5rem"
+        >
           Reset
         </button>
       </div>

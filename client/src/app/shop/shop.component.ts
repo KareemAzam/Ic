@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IBrand } from '../shared/Models/brand';
 import { IProduct } from '../shared/Models/product';
 import { ShopParams } from '../shared/Models/shopParams';
@@ -11,6 +11,7 @@ import { MatPaginatorDefaultOptions } from '@angular/material/paginator';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  @ViewChild('search', { static: true }) searchTerm!: ElementRef;
   products!: IProduct[];
   brands!: IBrand[];
   types!: IType[];
@@ -95,6 +96,17 @@ export class ShopComponent implements OnInit {
         .split(',')
         .map((str) => +str);
     }
+  }
+  onSearch() {
+    this.shopParams.search = this.searchTerm.nativeElement.value;
+    this.shopParams.pageIndex = 1;
+    this.getProducts();
+  }
+
+  onReset() {
+    this.searchTerm.nativeElement.value = '';
+    this.shopParams = new ShopParams();
+    this.getProducts();
   }
   onTest($event: any) {
     console.log($event);
