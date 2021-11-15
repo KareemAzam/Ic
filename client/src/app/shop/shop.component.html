@@ -57,6 +57,7 @@
         <mat-paginator
           [length]="totalCount"
           [pageSize]="shopParams.pageSize"
+          [pageIndex]="shopParams.pageIndex - 1"
           [pageSizeOptions]="pageSizeOptions"
           [showFirstLastButtons]="true"
           (page)="onPageChange($event.pageIndex, $event.pageSize)"
@@ -71,6 +72,7 @@
         </mat-form-field>
         <button
           color="primary"
+          [disabled]="search.value ? false : true"
           (click)="onSearch()"
           mat-flat-button
           style="margin: 0px 0.5rem"
