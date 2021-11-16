@@ -1,11 +1,25 @@
 <mat-toolbar color="primary">
-  <span mat-button routerLink=""> {{ title }}</span>
+  <span routerLink="" class="logo"> {{ title }}</span>
   <span class="example-spacer"></span>
 
   <nav>
-    <a mat-button routerLink="">Home</a>
-    <a mat-button routerLink="/shop">Shop</a>
-    <a mat-button href="#">Contact</a>
+    <a
+      mat-button
+      routerLink=""
+      routerLinkActive="navbar-header-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (focus)="(true)"
+      >Home</a
+    >
+    <a
+      mat-button
+      routerLink="/shop"
+      routerLinkActive="navbar-header-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (focus)="(true)"
+      >Shop</a
+    >
+    <a mat-button routerLink="">Contact</a>
   </nav>
   <span class="example-spacer"></span>
   <div class="flex-container">
