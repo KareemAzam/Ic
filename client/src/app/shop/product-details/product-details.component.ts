@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IProduct } from '../../shared/Models/product';
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-product-details',
@@ -6,7 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor() {}
+  product: IProduct;
+  constructor(
+    private shopService: ShopService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProduct();
+  }
+
+  getProduct() {
+    this.shopService
+      .getProduct(Number(this.activatedRoute.snapshot.paramMap.get('id')))
+      .subscribe(
+        (response) => {
+          this.product = response;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
 }
