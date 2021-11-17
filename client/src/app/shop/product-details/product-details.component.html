@@ -2,7 +2,7 @@
   {{ product.name }}
 </div> -->
 
-<mat-card>
+<mat-card *ngIf="product">
   <mat-card-title-group>
     <div>
       <img mat-card-image src="{{ product.pictureUrl }}" />
