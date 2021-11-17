@@ -19,7 +19,13 @@
       (focus)="(true)"
       >Shop</a
     >
-    <a mat-button routerLink="">Contact</a>
+    <a
+      mat-button
+      routerLink="/test-errors"
+      routerLinkActive="navbar-header-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Errors</a
+    >
   </nav>
   <span class="example-spacer"></span>
   <div class="flex-container">
