@@ -1,3 +1,27 @@
-<div *ngIf="product">
+<!-- <div *ngIf="product">
   {{ product.name }}
-</div>
+</div> -->
+
+<mat-card>
+  <mat-card-title-group>
+    <div>
+      <img mat-card-image src="{{ product.pictureUrl }}" />
+    </div>
+    <div>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ product.price | currency }}
+      </mat-card-subtitle>
+      <div class="product-info">
+        <mat-icon color="primary">add_circle</mat-icon>
+        <span>2</span>
+        <mat-icon color="primary">remove_circle</mat-icon>
+        <button mat-stroked-button>Add to Cart</button>
+      </div>
+    </div>
+  </mat-card-title-group>
+  <mat-card-content>
+    <h1>Description</h1>
+    <p>{{ product.description }}</p>
+  </mat-card-content>
+</mat-card>
