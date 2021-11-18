@@ -1,1 +1,29 @@
-<h1>Internal Server Error</h1>
+<div>
+  <h1 class="mat-h1">
+    Internal Server Error - refreshing the page will make the exception
+    disappear
+  </h1>
+
+  <mat-error class="mat-h2">Error: {{ error.message }}</mat-error>
+  <h2 class="mat-h3">
+    Note: if you are seeing this then Angular is probably not responsible
+  </h2>
+  <p class="mat-h4">What to do next?</p>
+  <ol class="mat-body-strong">
+    <li>Open chrome dev tools</li>
+    <li>Inspect the network tab</li>
+    <li>Check the failing request</li>
+    <li>Examine this request URL - make sure this is correct</li>
+    <li>
+      Reproduce the error in postman - if we get the same response in Postman,
+      then the issue is NOT with Angular
+    </li>
+  </ol>
+  <p class="mat-body-strong">
+    Following is the stack trace - this is where your investigation should
+    start!
+  </p>
+  <mat-error class="mat-body-strong" style="margin-top: 5px">{{
+    error.details
+  }}</mat-error>
+</div>
