@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 const MaterialComponents = [
   MatButtonModule,
   MatIconModule,
@@ -25,6 +25,7 @@ const MaterialComponents = [
   MatInputModule,
   MatPaginatorModule,
   MatGridListModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
