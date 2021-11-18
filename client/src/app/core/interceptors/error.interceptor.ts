@@ -28,16 +28,20 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (error) {
           if (error.status === 400)
-            this._snackBar.open(
-              error.error.statusCode + ' - ' + error.error.message,
-              'X',
-              {
-                duration: 5000,
-                direction: 'ltr',
-                horizontalPosition: this.horizontalPosition,
-                verticalPosition: this.verticalPosition,
-              }
-            );
+            if (error.error.errors) {
+              throw error.error;
+            } else {
+              this._snackBar.open(
+                error.error.statusCode + ' - ' + error.error.message,
+                'X',
+                {
+                  duration: 5000,
+                  direction: 'ltr',
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                }
+              );
+            }
           // .error(error.error.message, error.error.statusCode);
           // if (error.status === 401)
           //   this.toastr.error(error.error.message, error.error.statusCode);

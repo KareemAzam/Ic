@@ -9,7 +9,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 
 @NgModule({
-  declarations: [NavBarComponent, ThemeComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent],
+  declarations: [
+    NavBarComponent,
+    ThemeComponent,
+    TestErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+  ],
   imports: [CommonModule, MaterialModule, RouterModule],
   exports: [NavBarComponent],
 })
