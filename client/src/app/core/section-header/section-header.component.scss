@@ -1,0 +1,12 @@
+mat-toolbar {
+  display: grid;
+  grid-template-columns:80fr 20fr;
+
+  span {
+    cursor: pointer;
+  }
+
+  .navbar-header-item-selected {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
