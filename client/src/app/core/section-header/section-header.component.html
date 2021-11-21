@@ -1,7 +1,8 @@
-<mat-toolbar>
-  <h1>Title Goes Here</h1>
-  <div class="">
-    <xng-breadcrumb class="mat-app-background"></xng-breadcrumb>
-  </div>
-</mat-toolbar>
-
+<ng-container *ngIf="breadcrumbs$ | async as breadcrumb">
+  <mat-toolbar *ngIf="breadcrumb.length > 0 && breadcrumb[breadcrumb.length -1].label!=='Home'">
+    <h1>{{breadcrumb.length > 0 && breadcrumb[breadcrumb.length - 1].label | titlecase}}</h1>
+    <div class="">
+      <xng-breadcrumb class="mat-app-background"></xng-breadcrumb>
+    </div>
+  </mat-toolbar>
+</ng-container>
