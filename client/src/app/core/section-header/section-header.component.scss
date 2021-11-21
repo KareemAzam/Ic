@@ -1,12 +1,5 @@
 mat-toolbar {
   display: grid;
-  grid-template-columns:80fr 20fr;
-
-  span {
-    cursor: pointer;
-  }
-
-  .item-selected {
-    background: rgba(0, 0, 0, 0.1);
-  }
+  grid-template-columns:70fr 30fr;
+  justify-content: space-between;
 }
