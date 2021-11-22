@@ -4,20 +4,24 @@
   grid-template-rows: auto;
   gap: 10px 20px;
   margin: 1rem;
+ 
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: 30fr 30fr 30fr;
+    grid-template-rows: auto;
+    gap: 10px 20px;
+  }
 }
 
-.filter {
-  // text-align: center;
-}
-.card-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.card-container {
-  display: grid;
-  grid-template-columns: 30fr 30fr 30fr;
-  grid-template-rows: auto;
-  gap: 10px 20px;
-}
+
+
+
+

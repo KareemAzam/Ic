@@ -28,7 +28,7 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatGridListModule,
   MatSnackBarModule,
-  MatFormFieldModule,
+  MatFormFieldModule
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <section class="filter">
+  <section>
     <mat-action-list>
       <h3 matSubheader>sort</h3>
       <mat-form-field appearance="legacy">
@@ -55,12 +55,12 @@
     <div class="card-header">
       <header>
         <mat-paginator
+          (page)="onPageChange($event.pageIndex, $event.pageSize)"
           [length]="totalCount"
-          [pageSize]="shopParams.pageSize"
           [pageIndex]="shopParams.pageIndex - 1"
           [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="shopParams.pageSize"
           [showFirstLastButtons]="true"
-          (page)="onPageChange($event.pageIndex, $event.pageSize)"
           aria-label="Select page"
         >
         </mat-paginator>
@@ -68,20 +68,20 @@
 
       <div>
         <mat-form-field appearance="standard" style="margin: 0px 0.5rem">
-          <input #search matInput placeholder="search" />
+          <input #search matInput placeholder="search"/>
         </mat-form-field>
         <button
-          color="primary"
-          [disabled]="search.value ? false : true"
           (click)="onSearch()"
+          [disabled]="search.value ? false : true"
+          color="primary"
           mat-flat-button
           style="margin: 0px 0.5rem"
         >
           Search
         </button>
         <button
-          color="accent"
           (click)="onReset()"
+          color="accent"
           mat-flat-button
           style="margin: 0px 0.5rem"
         >
