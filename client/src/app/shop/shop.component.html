@@ -1,57 +1,59 @@
 <div class="grid-container">
   <section>
-    <mat-action-list>
-      <h3 matSubheader>sort</h3>
-      <mat-form-field appearance="legacy">
-        <mat-select
-          (selectionChange)="onSortSelected(shopParams.sort)"
-          [(ngModel)]="shopParams.sort"
-        >
-          <mat-option *ngFor="let sort of sortOption" [value]="sort.value">
-            {{ sort.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-action-list>
+    <ng-container *ngIf="types && brands">
+      <mat-action-list>
+        <h3 matSubheader>sort</h3>
+        <mat-form-field appearance="legacy">
+          <mat-select
+            (selectionChange)="onSortSelected(shopParams.sort)"
+            [(ngModel)]="shopParams.sort"
+          >
+            <mat-option *ngFor="let sort of sortOption" [value]="sort.value">
+              {{ sort.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-action-list>
 
-    <mat-selection-list
-      (selectionChange)="
+      <mat-selection-list
+        (selectionChange)="
         onBrandSelected($event.source.selectedOptions.selected[0].value)
       "
-      [multiple]="false"
-      dense
-    >
-      <h3 matSubheader>Brands</h3>
-      <mat-list-option
-        *ngFor="let brand of brands"
-        [selected]="brand.id == shopParams.brandId"
-        [value]="brand.id"
+        [multiple]="false"
+        dense
       >
-        {{ brand.name }}
-        <mat-divider></mat-divider>
-      </mat-list-option>
-    </mat-selection-list>
+        <h3 matSubheader>Brands</h3>
+        <mat-list-option
+          *ngFor="let brand of brands"
+          [selected]="brand.id == shopParams.brandId"
+          [value]="brand.id"
+        >
+          {{ brand.name }}
+          <mat-divider></mat-divider>
+        </mat-list-option>
+      </mat-selection-list>
 
-    <mat-selection-list
-      (selectionChange)="
+      <mat-selection-list
+        (selectionChange)="
         onTypeSelected($event.source.selectedOptions.selected[0].value)
       "
-      [multiple]="false"
-      dense
-    >
-      <h3 matSubheader>Types</h3>
-      <mat-list-option
-        *ngFor="let type of types"
-        [selected]="type.id == shopParams.typeId"
-        [value]="type.id"
+        [multiple]="false"
+        dense
       >
-        {{ type.name }}
-        <mat-divider></mat-divider>
-      </mat-list-option>
-    </mat-selection-list>
+        <h3 matSubheader>Types</h3>
+        <mat-list-option
+          *ngFor="let type of types"
+          [selected]="type.id == shopParams.typeId"
+          [value]="type.id"
+        >
+          {{ type.name }}
+          <mat-divider></mat-divider>
+        </mat-list-option>
+      </mat-selection-list>
+    </ng-container>
   </section>
 
-  <section>
+  <section *ngIf="products">
     <div class="card-header">
       <header>
         <mat-paginator

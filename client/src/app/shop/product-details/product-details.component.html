@@ -1,15 +1,11 @@
-<!-- <div *ngIf="product">
-  {{ product.name }}
-</div> -->
-
 <mat-card *ngIf="product">
   <mat-card-title-group>
     <div>
-      <img mat-card-image src="{{ product.pictureUrl }}" />
+      <img mat-card-image src="{{ product.pictureUrl }}"/>
     </div>
     <div>
       <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-subtitle>
+      <mat-card-subtitle style="font-size: 1.5em">
         {{ product.price | currency }}
       </mat-card-subtitle>
       <div class="product-info">
