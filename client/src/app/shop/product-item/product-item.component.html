@@ -1,17 +1,17 @@
 <mat-card>
   <img
+    alt="{{ product?.name }}"
     mat-card-image
     src="{{ product?.pictureUrl }}"
-    alt="{{ product?.name }}"
   />
   <mat-card-content>
-    <a mat-button color="primary" routerLink="/shop/{{ product?.id }}">{{
+    <a color="primary" mat-button routerLink="/shop/{{ product?.id }}">{{
       product?.name
-    }}</a>
+      }}</a>
     <span>{{ product?.price | currency }}</span>
   </mat-card-content>
   <mat-card-actions class="mat-card-actions">
-    <button mat-stroked-button>
+    <button (click)="addItemToBasket()" mat-stroked-button>
       <mat-icon>shopping_cart</mat-icon>
     </button>
     <button mat-stroked-button routerLink="/shop/{{ product?.id }}">
