@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
-import {Basket, IBasket, IBasketItem} from '../shared/Models/basket';
-import {map} from 'rxjs/operators';
-import {IProduct} from '../shared/Models/product';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { Basket, IBasket, IBasketItem } from '../shared/Models/basket';
+import { map } from 'rxjs/operators';
+import { IProduct } from '../shared/Models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +16,32 @@ export class BasketService {
 
   constructor(private http: HttpClient) {}
 
+  private static createBasket(): IBasket {
+    const basket = new Basket();
+    localStorage.setItem('basket_id', basket.id);
+    return basket;
+  }
+
+  private static mapProductItemToBasketItem(
+    item: IProduct,
+    quantity: number
+  ): IBasketItem {
+    return {
+      id: item.id,
+      productName: item.name,
+      price: item.price,
+      pictureUrl: item.pictureUrl,
+      quantity,
+      brand: item.productBrand,
+      type: item.productType,
+    };
+  }
+
   getBasket(id: string) {
     return this.http.get<IBasket>(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
         this.basketSource.next(basket);
+        console.log(this.getCurrentBasketValue());
       })
     );
   }
@@ -50,8 +72,12 @@ export class BasketService {
     this.setBasket(basket);
   }
 
-  private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
-    const index = items.findIndex(i => i.id === itemToAdd.id);
+  private addOrUpdateItem(
+    items: IBasketItem[],
+    itemToAdd: IBasketItem,
+    quantity: number
+  ): IBasketItem[] {
+    const index = items.findIndex((i) => i.id === itemToAdd.id);
     if (index === -1) {
       itemToAdd.quantity = quantity;
       items.push(itemToAdd);
@@ -60,23 +86,4 @@ export class BasketService {
     }
     return items;
   }
-
-  private static createBasket(): IBasket {
-    const basket = new Basket();
-    localStorage.setItem('basket_id', basket.id);
-    return basket;
-  }
-
-  private static mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
-    return {
-      id: item.id,
-      productName: item.name,
-      price: item.price,
-      pictureUrl: item.pictureUrl,
-      quantity,
-      brand: item.productBrand,
-      type: item.productType
-    };
-  }
-
 }
