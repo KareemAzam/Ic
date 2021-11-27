@@ -1,35 +1,38 @@
 <mat-toolbar color="primary">
-  <span routerLink="" class="logo"> {{ title }}</span>
+  <span class="logo" routerLink=""> {{ title }}</span>
   <span class="example-spacer"></span>
 
   <nav>
     <a
+      (focus)="(true)"
+      [routerLinkActiveOptions]="{ exact: true }"
       mat-button
       routerLink=""
       routerLinkActive="navbar-header-item-selected"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (focus)="(true)"
-      >Home</a
+    >Home</a
     >
     <a
+      (focus)="(true)"
+      [routerLinkActiveOptions]="{ exact: true }"
       mat-button
       routerLink="/shop"
       routerLinkActive="navbar-header-item-selected"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (focus)="(true)"
-      >Shop</a
+    >Shop</a
     >
     <a
+      [routerLinkActiveOptions]="{ exact: true }"
       mat-button
       routerLink="/test-error"
       routerLinkActive="navbar-header-item-selected"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Errors</a
+    >Errors</a
     >
   </nav>
   <span class="example-spacer"></span>
   <div class="flex-container">
-    <mat-icon matBadge="15" matBadgeColor="accent">shopping_cart</mat-icon>
+    <a mat-icon-button routerLink="/basket">
+      <mat-icon aria-label="Shopping Cart" matBadge="15" matBadgeColor="accent">shopping_cart</mat-icon>
+    </a>
+
     <a mat-raised-button>Login</a>
     <a mat-raised-button>Sign up</a>
   </div>

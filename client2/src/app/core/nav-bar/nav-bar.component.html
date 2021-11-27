@@ -14,38 +14,38 @@
   "
 >
   <img
-    src="../../assets/images/logo.png"
     alt="logo"
-    style="max-width: 70px"
     class="logo"
     routerLink="/"
+    src="../../assets/images/logo.png"
+    style="max-width: 70px"
   />
   <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger">
     <a
-      class="p-2"
-      [routerLink]="['/']"
-      routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
-      >Home</a
+      [routerLink]="['/']"
+      class="p-2"
+      routerLinkActive="active"
+    >Home</a
     >
     <a
+      [routerLinkActiveOptions]="{ exact: true }"
       class="p-2"
       routerLink="/shop"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Shop</a
+    >Shop</a
     >
     <a
+      [routerLinkActiveOptions]="{ exact: true }"
       class="p-2"
       routerLink="/test-error"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Errors</a
+    >Errors</a
     >
   </nav>
 
   <div class="d-flex align-items-center">
-    <a class="position-relative">
+    <a class="position-relative" routerLink="/basket">
       <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
       <div class="cart-no">5</div>
     </a>
