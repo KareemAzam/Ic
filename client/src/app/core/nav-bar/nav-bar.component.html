@@ -30,7 +30,14 @@
   <span class="example-spacer"></span>
   <div class="flex-container">
     <a mat-icon-button routerLink="/basket">
-      <mat-icon aria-label="Shopping Cart" matBadge="15" matBadgeColor="accent">shopping_cart</mat-icon>
+
+      <mat-icon *ngIf="(basket$ | async) as basket"
+                [matBadge]="basket.items.length"
+                aria-label="Shopping Cart"
+                matBadgeColor="accent">shopping_cart
+      </mat-icon>
+
+
     </a>
 
     <a mat-raised-button>Login</a>
