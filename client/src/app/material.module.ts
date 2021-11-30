@@ -13,6 +13,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -28,7 +29,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatGridListModule,
   MatSnackBarModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTableModule,
 ];
 
 @NgModule({

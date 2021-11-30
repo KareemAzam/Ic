@@ -1,0 +1,30 @@
+<div>
+  <mat-list *ngIf="(basketTotal$ | async) as basketTotals">
+    <mat-list-item class="Order-Summary" headline> Order Summary</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <p>Shipping costs will be added depending on choices made during checkout</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <div class="item">
+        <span>Order subtotal</span>
+        <span>{{basketTotals.subtotal | currency}}</span>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <div class="item">
+        <span>Shipping and handling</span>
+        <span>{{basketTotals.shipping | currency}}</span>
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <div class="item">
+        <span>Total</span>
+        <span>{{basketTotals.total | currency}}</span>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

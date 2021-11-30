@@ -2,11 +2,71 @@
   <div *ngIf="(basket$ | async) === null">
     <p>there no item in your Basket</p>
   </div>
-  <div *ngIf="basket$ | async as basket">
-    <ul>
-      <li *ngFor="let item of basket.items">
-        {{item.productName}} - {{item.quantity}}
-      </li>
-    </ul>
+  <table *ngIf="(basket$ | async) as basket" [dataSource]="basket.items" class="mat-elevation-z8" mat-table>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- productName Column -->
+    <ng-container matColumnDef="productName">
+      <th *matHeaderCellDef mat-header-cell>Product</th>
+      <td *matCellDef="let element" mat-cell>
+        <div>
+          <img alt="{{element.productName}}" class="img-fluid"
+               src="{{element.pictureUrl}}" style="max-height: 50px;">
+          <h3>
+            <a mat-button routerLink="/shop/{{element.id}}">{{element.productName}}</a>
+          </h3>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- price Column -->
+    <ng-container matColumnDef="price">
+      <th *matHeaderCellDef mat-header-cell>price</th>
+      <td *matCellDef="let element" mat-cell>
+        {{element.price |currency}}
+      </td>
+    </ng-container>
+
+
+    <!-- quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th *matHeaderCellDef mat-header-cell>quantity</th>
+      <td *matCellDef="let element" mat-cell>
+        <div class="product-info">
+          <mat-icon (click)="incrementItemQuantity(element)" color="primary">add_circle</mat-icon>
+          <span>{{element.quantity}}</span>
+          <mat-icon (click)="decrementItemQuantity(element)" color="primary">remove_circle</mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <th *matHeaderCellDef mat-header-cell>total</th>
+      <td *matCellDef="let element" mat-cell>
+        {{element.price * element.quantity | currency}}
+      </td>
+    </ng-container>
+
+    <!-- Remove Column -->
+    <ng-container matColumnDef="remove">
+      <th *matHeaderCellDef mat-header-cell>remove</th>
+      <td *matCellDef="let element" mat-cell>
+        <a (click)="removeBasketItem(element)">
+          <mat-icon class="material-icons" color="warn">delete</mat-icon>
+
+        </a>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+
+  <div class="order-totals">
+    <app-order-totals></app-order-totals>
+    <a mat-stroked-button routerLink="/checkout"> Proceed to checkout </a>
   </div>
 </div>
