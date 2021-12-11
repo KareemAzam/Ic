@@ -1,0 +1,13 @@
+﻿API - Identity 
+Setting up the identity packages
+- Project Infrastructure :
+ Install-Package Microsoft.AspNetCore.Identity
+ Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+ Install-Package Microsoft.IdentityModel.Tokens -Version 6.15.0
+ Install-Package System.IdentityModel.Tokens.Jwt -Version 6.15.0
+
+- Project API :
+Install-Package Microsoft.AspNetCore.Authentication.JwtBearer -Version 5.0.11
+
+- Project Core :
+Install-Package Microsoft.Extensions.Identity.Stores -Version 5.0.11
