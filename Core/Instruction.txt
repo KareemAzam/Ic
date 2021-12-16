@@ -1,13 +1,75 @@
-﻿API - Identity 
-Setting up the identity packages
+﻿** API - Identity 
+*Setting up the identity packages
 - Project Infrastructure :
- Install-Package Microsoft.AspNetCore.Identity
- Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
- Install-Package Microsoft.IdentityModel.Tokens -Version 6.15.0
- Install-Package System.IdentityModel.Tokens.Jwt -Version 6.15.0
-
+     Install-Package Microsoft.AspNetCore.Identity
+     Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+     Install-Package Microsoft.IdentityModel.Tokens -Version 6.15.0
+     Install-Package System.IdentityModel.Tokens.Jwt -Version 6.15.0
+    
 - Project API :
-Install-Package Microsoft.AspNetCore.Authentication.JwtBearer -Version 5.0.11
-
+    Install-Package Microsoft.AspNetCore.Authentication.JwtBearer -Version 5.0.11
+    
 - Project Core :
-Install-Package Microsoft.Extensions.Identity.Stores -Version 5.0.11
+    Install-Package Microsoft.Extensions.Identity.Stores -Version 5.0.11
+        
+*Setting up the identity classes
+- Db.cs =>
+- Add IdentityUserExtend 
+- Add IdentityUserProfile
+- Add Address.cs => and add it as dbSet in db.cs
+ 
+    
+*Adding the IdentityDbContext
+- did it with db.cs rather than make a new context
+
+*Adding a new migration
+-dotnet ef migrations add IdentityInitial -p Infrastructure -s API -o Identity/Migrations -c Db
+-dotnet ef migrations remove -p Infrastructure -s API   -c Db
+
+*Seeding identity data
+Add new Method in dbSeed SeedUsersAsync()
+
+*Adding the Startup services for identity
+- setup identity service to use 
+- add new class in Extensions folder as service to use in startUp.cs
+
+*Adding identity to program class
+
+*Adding an Account controller
+- Implement Login method
+
+*Registering a user
+- Implement Register method
+
+* Adding a token generation service
+- Project core => add interface = ITokenservice
+- Project Infrastructure ==> add class = TokenService =>  Services/TokenService
+
+*Setting up identity to use the token
+- Project Api/Extensions/IdentityServiceExtinctions
+- config service.AddAuthentication();
+- AppSettings.Development.json => add token object
+- startup => add middle wear for UseAuthentication
+
+*Testing the token
+- project Api/Extensions/ApplicationServiceExtinctions => add token service 
+- AccountController => inject token service 
+
+* Troubleshooting auth issues
+- project Api/Extensions/IdentityServiceExtinctions =>  ValidateAudience = false,
+- this update microsoft identity default value and allow the clint to access the end point this 
+    to make post man happy
+* Adding additional account methods 
+- GetCurrentUser() => without routing just hit the account control 
+- CheckEmailExistsAsync() => 
+- GetUserAddress() =>  
+
+*Adding user manager extension methods
+- FindUserAndAddressByEmailClaimsPrincipalAsync
+- FindUserByEmailClaimsPrincipal
+- FindUserAndUserProfileByEmailClaimsPrincipalAsync
+
+*Adding another Dto for the user
+- To resolve error related to json depth
+- add addressDto
+- create new map to address

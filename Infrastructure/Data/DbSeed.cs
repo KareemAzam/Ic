@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
@@ -55,6 +57,35 @@ namespace Infrastructure.Data
             {
                 var logger = loggerFactory.CreateLogger<DbSeed>();
                 logger.LogError(ex.Message);
+            }
+        }
+
+        public static async Task SeedUsersAsync(UserManager<IdentityUserExtend> userManager,Db db)
+        {
+            if (!userManager.Users.Any())
+            {
+                var user = new IdentityUserExtend()
+                {
+                    UserName = "KareemReda85@gmail.com",
+                    Email = "KareemReda85@gmail.com",
+                    Address = new Address
+                    {
+                        FirstName = "kareem",
+                        LastName = "Azam",
+                        Street = "2st El-Jaffary",
+                        City = "Maadi",
+                        State = "Cairo",
+                        Zip = "12345"
+                    },
+                    IdentityUserProfile = new IdentityUserProfile()
+                    {
+                        FirstName = "Kareem",
+                        LastName = "Azam",
+                        DisplayName = "Kareem Azam"
+                    }
+                };
+                
+                await userManager.CreateAsync(user, "Pa$$w0rd");
             }
         }
     }
