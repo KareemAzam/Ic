@@ -31,5 +31,11 @@ namespace API.Extensions
                 .Include(x => x.IdentityUserProfile)
                 .SingleOrDefaultAsync(x=> x.Email == email);
         }
+        public static async Task<IdentityUserExtend> FindUserAndUserProfileByEmail(this UserManager<IdentityUserExtend> input,string email)
+        {
+            return await input.Users
+                .Include(x => x.IdentityUserProfile)
+                .SingleOrDefaultAsync(x=> x.Email == email);
+        }
     }
 }

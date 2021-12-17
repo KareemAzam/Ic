@@ -85,7 +85,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var identityUserExtend =
-                await _userManager.FindUserAndUserProfileByEmailClaimsPrincipalAsync(HttpContext.User);
+                await _userManager.FindUserAndUserProfileByEmail(loginDto.Email);
             if (identityUserExtend == null) return Unauthorized(new ApiResponse(401));
 
             var signInResult =
