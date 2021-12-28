@@ -4,7 +4,7 @@
 
   <nav>
     <a
-      (focus)="(true)"
+      (focus)="true"
       [routerLinkActiveOptions]="{ exact: true }"
       mat-button
       routerLink=""
@@ -12,7 +12,7 @@
     >Home</a
     >
     <a
-      (focus)="(true)"
+      (focus)="true"
       [routerLinkActiveOptions]="{ exact: true }"
       mat-button
       routerLink="/shop"
@@ -40,8 +40,8 @@
 
     </a>
 
-    <a mat-raised-button>Login</a>
-    <a mat-raised-button>Sign up</a>
+    <a mat-raised-button routerLink="/account/login">Login</a>
+    <a mat-raised-button routerLink="/account/register">Sign up</a>
   </div>
   <app-theme></app-theme>
 </mat-toolbar>
